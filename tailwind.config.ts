@@ -28,5 +28,6 @@ const config: Config = {
     },
   },
   plugins: [require('@tailwindcss/forms')],
+  darkMode: 'media',
 };
 export default config;
