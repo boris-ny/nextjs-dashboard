@@ -6,6 +6,8 @@ import {
 } from '@heroicons/react/24/outline';
 import { lusitana } from '@/app/ui/fonts';
 import { fetchCardData } from '@/app/lib/data';
+import { Suspense } from 'react';
+import { CardSkeleton } from '@/app/ui/skeletons';
 
 const iconMap = {
   collected: BanknotesIcon,
@@ -25,14 +27,22 @@ export default async function CardWrapper() {
     <>
       {/* NOTE: uncomment in this code when you get to this point in the course */}
 
-      <Card title="Collected" value={totalPaidInvoices} type="collected" />
-      <Card title="Pending" value={totalPendingInvoices} type="pending" />
-      <Card title="Total Invoices" value={numberOfInvoices} type="invoices" />
-      <Card
-        title="Total Customers"
-        value={numberOfCustomers}
-        type="customers"
-      />
+      <Suspense fallback={<CardSkeleton />}>
+        <Card title="Collected" value={totalPaidInvoices} type="collected" />
+      </Suspense>
+      <Suspense fallback={<CardSkeleton />}>
+        <Card title="Pending" value={totalPendingInvoices} type="pending" />
+      </Suspense>
+      <Suspense fallback={<CardSkeleton />}>
+        <Card title="Total Invoices" value={numberOfInvoices} type="invoices" />
+      </Suspense>
+      <Suspense fallback={<CardSkeleton />}>
+        <Card
+          title="Total Customers"
+          value={numberOfCustomers}
+          type="customers"
+        />
+      </Suspense>
     </>
   );
 }
